@@ -4,6 +4,7 @@
 
 
 	MPI_SEND -> bloquant : rendra la main seulement après s’être assuré que modifier le buffer d’application est sûr (i.e. n’altère pas de données)
+	
 	MPI_ISEND -> non bloquant : rendent la main immédiatement, on ne peut pas deviner le moment où l’exécution va se passer (dangereux)
 
 	Non bloquant dangereux donc solution : faire un test MPI_Test ou MPI_Waitall
