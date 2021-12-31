@@ -57,15 +57,7 @@ Cette variation lorsqu'on prend une dimension de 1024 s'explique par le stockage
 `make TestProduct.exe && ./TestProduct.exe 1024`
 
 
-  ordre           | time    | MFlops  | MFlops(n=2048) 
-------------------|---------|---------|----------------
-i,j,k (origine)   | 2.73764 | 782.476 |                
-j,i,k             |  |  |    
-i,k,j             |  |  |    
-k,i,j             |  |  |    
-j,k,i             |  |  |    
-k,j,i             |  |  |    
-
+L'ordre k, j, i est le plus rapide avec un temps d'éxecution de 20.78s pour une dimension 1024. Cette efficacité s'explique car on réutilise parmi toutes les permutations, un maximum de valeurs déjà stockées dans le cache et on profite donc de la mémoire entrelacée.
 
 *Discussion des résultats*
 
@@ -75,19 +67,16 @@ k,j,i             |  |  |
 
 `make TestProduct.exe && OMP_NUM_THREADS=8 ./TestProduct.exe 1024`
 
-  OMP_NUM         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
-------------------|---------|----------------|----------------|---------------
-1                 |  |
-2                 |  |
-3                 |  |
-4                 |  |
-5                 |  |
-6                 |  |
-7                 |  |
-8                 |  |
+  OMP_NUM         | Temps mat-mat (s)
+------------------|---------
+1                 | 21.7149 |
+2                 | 10.9578 |
+3                 | 7.5483 |
+4                 | 5.8104 |
+8                 | 6.29554 |
 
 
-
+Le résultat peut encore être amélioré parce qu'on n'a pas encore optimisé les transferts de mémoire, qui existent encore sur la même partie de la matrice.
 
 ### Produit par blocs
 
