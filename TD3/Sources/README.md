@@ -65,6 +65,8 @@ L'ordre k, j, i est le plus rapide avec un temps d'éxecution de 20.78s pour une
 
 ### OMP sur la meilleure boucle 
 
+Pour une dimension de 1024
+
 `make TestProduct.exe && OMP_NUM_THREADS=8 ./TestProduct.exe 1024`
 
   OMP_NUM         | Temps mat-mat (s)
@@ -76,37 +78,32 @@ L'ordre k, j, i est le plus rapide avec un temps d'éxecution de 20.78s pour une
 8                 | 6.29554 |
 
 
-Le résultat peut encore être amélioré parce qu'on n'a pas encore optimisé les transferts de mémoire, qui existent encore sur la même partie de la matrice.
+Le résultat peut encore être amélioré parce qu'on n'a pas encore optimisé les transferts de mémoire, qui existent encore sur la même partie de la matrice, le programme est donc toujours memory-bound.
 
 ### Produit par blocs
 
+Pour une dimension de 1024 
+
 `make TestProduct.exe && ./TestProduct.exe 1024`
 
-  szBlock         | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
-------------------|---------|----------------|----------------|---------------
-origine (=max)    |  |
-32                |  |
-64                |  |
-128               |  |
-256               |  |
-512               |  | 
-1024              |  |
+  szBlock         | tps (s)
+------------------|---------
+16   		  | 1.82049 |
+32                | 1.56394 |
+64                | 1.35832 |
+128               | 1.27438 |
+256               | 1.32087 |
+512               | 1.63743 | 
 
+On obtient le temps minimal pour une taille de blocs optimale de 128.
 
+Le temps est bien plus court pour le produit par bloc que pour le produit "scalaire", cela s'explique car la taille des blocs est assez petite pour optimiser le stockage en mémoire cache. Le programme est donc cpu-bound, c'est ce que l'on cherche.
 
 
 ### Bloc + OMP
 
 
-
-  szBlock      | OMP_NUM | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
----------------|---------|---------|------------------------------------------------
-A.nbCols       |  1      |         | 
-512            |  8      |         | 
-
-
-
-
+On parallélise en ajoutant la commande `# pragma omp parallel for` dans la fonction `oprator*` juste avant les boucles for.
 
 
 
