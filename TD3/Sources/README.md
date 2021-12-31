@@ -105,6 +105,18 @@ Le temps est bien plus court pour le produit par bloc que pour le produit "scala
 
 On parallélise en ajoutant la commande `# pragma omp parallel for` dans la fonction `oprator*` juste avant les boucles for.
 
+Pour une dimension de 1024 et une taille de blocs de 128, on obtient :
+
+OMP_NUM    | temps (s) | accélération
+-----------|--------------|----------
+séquentiel | 1.27438  | 1
+1          | 1.47383  | 0.86467
+2          | 1.17234  | 1.08704
+3          | 0.96998  | 1.31382
+4          | 0.91212  | 1.39716
+8          | 0.89023  | 1.43151
+
+Cette fois l'accélération augmente puisqu'on a utilisé le produit par bloc.
 
 
 # Tips 
