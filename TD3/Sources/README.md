@@ -39,7 +39,16 @@ On constate qu'il n'y que très peu d'accélération et parfois même le program
 
 ## Produit matrice-matrice
 
+1]
 
+dimension 1023 : tps = 20.8912s (MFlops : 102.493)
+
+dimension 1024 : tps = 41.2854s (MFlops : 52.0155)
+
+dimension 1025 : tps = 21.0724s (MFlops : 102.209)
+
+
+Cette variation lorsqu'on prend une dimension de 1024 s'explique par le stockage en adresse mémoire cache des variables. En effet, pour une matrice de dimension 1024, on va faire des sauts de 8x1024 octets et donc souvent retomber sur la même adresse cache dans notre boucle interne. Il y aura donc beaucoup de transert entre mémoire caché et mémoire vive, ce qui ralentit beaucoup le calcul.
 
 ### Permutation des boucles
 
