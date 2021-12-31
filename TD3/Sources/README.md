@@ -1,39 +1,39 @@
 
 
-# TP2 de NOM Prénom
+# TP2 de ABBANA BENNANI Sarah
 
 `pandoc -s --toc tp2.md --css=./github-pandoc.css -o tp2.html`
 
 
 
 
-
-## lscpu
-
-```
-coller ici le résultats de lscpu. 
-```
-
-*Des infos utiles s'y trouvent : nb core, taille de cache*
-
-
-
 ## Produit scalaire 
 
-*Expliquer les paramètres, les fichiers, l'optimisation de compil, NbSamples, ...*
 
-OMP_NUM    | samples=1024 | 
+dotproduct.cpp pour samples=1024 sur une machine de l'ENSTA :
+
+OMP_NUM    | temps produits scalaires | accélération
 -----------|--------------|----------
-séquentiel |   | 
-1          |   | 
-2          |   | 
-3          |   | 
-4          |   | 
-8          |   | 
+séquentiel | 0.712463  | 1
+1          | 0.712114  | 1.00049
+2          | 0.711694  | 1.00108
+3          | 0.711775  | 1.00097
+4          | 0.711866  | 1.00084
+8          | 0.711962  | 1.00070
 
 
-*Discuter sur ce qu'on observe, la logique qui s'y cache.*
+dotproduct_thread.cpp pour samples=1024 sur une machine de l'ENSTA :
 
+OMP_NUM    | temps produits scalaires | accélération
+-----------|--------------|----------
+séquentiel | 1.35959  | 1
+1          | 1.40736  | 0.96606
+2          | 1.40669  | 0.96652
+3          | 1.40527  | 0.96663
+4          | 1.35303  | 1.00084
+8          | 1.40835  | 0.96538
+
+On constate qu'il n'y que très peu d'accélération et parfois même le programme est plus lent. Cela s'explique parce que ce programme est memory-bound (pour chaque donnée lue en mémoire, il n'y a qu'une opération effectuée), donc le paralléliser ne l'accélère pas.
 
 
 
