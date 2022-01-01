@@ -52,14 +52,10 @@ Cette variation lorsqu'on prend une dimension de 1024 s'explique par le stockage
 
 ### Permutation des boucles
 
-*Expliquer comment est compilé le code (ligne de make ou de gcc) : on aura besoin de savoir l'optim, les paramètres, etc. Par exemple :*
-
-`make TestProduct.exe && ./TestProduct.exe 1024`
 
 
-L'ordre k, j, i est le plus rapide avec un temps d'éxecution de 20.78s pour une dimension 1024. Cette efficacité s'explique car on réutilise parmi toutes les permutations, un maximum de valeurs déjà stockées dans le cache et on profite donc de la mémoire entrelacée.
+Les meilleures permutations sont celles où i est la boucle la plus interne. L'ordre k, j, i est le plus rapide avec un temps d'éxecution de 20.78s pour une dimension 1024. Cette efficacité s'explique car on réutilise parmi toutes les permutations, un maximum de valeurs déjà stockées dans le cache et on profite donc de la mémoire entrelacée.
 
-*Discussion des résultats*
 
 
 
