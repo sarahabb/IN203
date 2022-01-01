@@ -1,6 +1,6 @@
-#include Make.inc
-include Make_msys2.inc
-#include Make_osx.inc
+#include Make_linux.inc
+#include Make_msys2.inc
+include Make_osx.inc
 
 CXXFLAGS = -std=c++14
 ifdef DEBUG
@@ -11,7 +11,7 @@ CXXFLAGS2 = ${CXXFLAGS} -O2 -march=native -Wall
 CXXFLAGS += -O3 -march=native -Wall
 endif
 
-ALL= dotproduct.exe dotproduct_thread.exe TestProductMatrix.exe bhudda.exe bitonic.exe
+ALL= dotproduct_openmp.exe dotproduct_thread.exe bhudda_omp.exe  bitonic_thread.exe
 
 default:	help
 
