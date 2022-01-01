@@ -114,14 +114,3 @@ séquentiel | 1.27438  | 1
 
 Cette fois l'accélération augmente puisqu'on a utilisé le produit par bloc.
 
-
-# Tips 
-
-```
-	env 
-	OMP_NUM_THREADS=4 ./dot_product.exe
-```
-
-```
-    $ for i in $(seq 1 4); do elap=$(OMP_NUM_THREADS=$i ./TestProductOmp.exe|grep "Temps CPU"|cut -d " " -f 7); echo -e "$i\t$elap"; done > timers.out
-```
