@@ -75,5 +75,32 @@ On obtient :
 
 pour 100 000 individus
 
+nb processus | temps simulation (s) | accélération
+-------------|----------------------|----------
+2            | 0.025                | 1
+3            | 0.016                | 1.5
+4            | 0.013                | 1.8
+
+
+pour 100 000*nb processus individus 
+
+nb processus | temps simulation (s) | accélération
+-------------|----------------------|----------
+2            | 0.055                | 1
+3            | 0.055                | 1.4
+4            | 0.055                | 1.9
+
+(temps séquentiel pour 200 000 individus = 0.055s ; pour 300 000 individus : 0.077s ; pour 400 000 individus : 0.106s)
+
+L'augmentation du nombre de processus fait donc considérablement augmenter l'accélération et donc l'efficacité de cette parallélisation pour la simulation.
 
 ### (2.5.1) Parallélisation finale -- simulation_async_mpi_omp.cpp
+
+Je n'ai pas pu obtenir de résultats en temps pour cette étape ayant des problèmes d'exécution avec OpenMP, je n'avais pas non plus d'autres ordinateurs à disposition ...
+
+
+## Bilan
+
+Grâce à ce projet, nous avons pu prolonger le cours et les TD déjà effectués en voyant comment utiliser conjointement MPI et OpenMP pour paralléliser un programme, et avec des résultats flagrants dès l'augmentation du nombre de processus ou threads. 
+
+J'ai de plus pu voir l'intérêt de l'affichage asynchrone et mieux comprendre les relations entre différents processus. J'ai également pu découvrir de nouvelles fonctions très pratiques comme MPI_Iprobe ou MPI_Comm_split qui montrent d'autant plus l'étendue de ce qu'il est possible de faire en programmation parallèle.
