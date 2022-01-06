@@ -21,7 +21,7 @@ Pour tiny_lena_gray.png (et taux=10%) :
 
 On a vu juste avant que les fonctions prenant le plus de temps sont l'encodage, puis la reconstitution.
 
-En parallélisant d'abord seulement l'encode de l'image avec la ligne `# pragma omp parallel for` devant les 4 boucles for de la fonction `discretTransformFourier`, on a les temps et accélérations suivants :
+En parallélisant d'abord seulement l'encodage de l'image avec la ligne `# pragma omp parallel for` devant les 4 boucles for de la fonction `discretTransformFourier` en parallélisant les pixels. On a les temps et accélérations suivants :
 
 Pour small_lena_gray.png (et taux=10%) :
 
@@ -33,4 +33,19 @@ nb threads   | temps encodage (s)   | accélération
 4            | 67.7675              | 3.625
 
 
-On parallélise ensuite la reconstitution dans la fonction ìnversePartialDiscretTransformFourier`
+On parallélise ensuite les coefficients complexes (sélectionnés durant la compression) de la reconstitution dans la fonction `inversePartialDiscretTransformFourier` avec la commande `# pragma omp parallel for` devant les boucles de la foncion
+
+On obtient pour small_lena_gray.png (et taux=10%) :
+
+nb threads   | temps restitution (s)| accélération
+-------------|----------------------|----------
+1            | 28.1454              | 1
+2            | 14.515               | 1.939
+3            | 9.82165              | 2.866
+4            | 7.53308              | 3.734
+
+
+On remarque pour les deux parallélisations une accélération qui augmente avec le nombre de threads, on voit donc que ces parallélisations sont très efficaces pour diminuer le temps de calcul de l'encodage et de la reconstitution de l'image.
+
+## Première parallélisation MPI
+
