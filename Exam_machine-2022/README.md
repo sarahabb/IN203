@@ -58,3 +58,8 @@ Ainsi chaque processus s'occupe d'une partie des lignes et réalise la transform
 On récupère ensuite l'image entière transformée à l'aide de la commande `MPI_Allgather`.
 
 Je n'ai pas réussi à obtenir une image correcte, j'ai l'impression d'avoir un problème dans le `MPI_Allgather` qui fait que pour l'affichage, le processus 0 ne considère que sa transformation à lui (quand j'exécute avec 2 processus j'ai la moitié de l'image correcte, avec 3 un tiers). J'ai essayé de recréer un X différent de celui modifié dans la boucle pour que le Allgather soit correct mais j'avais des segmentation fault que je n'ai pas réussi à enlever.
+
+
+## Deuxième parallélisation MPI
+
+Je n'ai pas eu le temps de la faire mais au vu des problèmes de la question précédente je voulais essayer de faire la concaténation depuis le main avec un `MPI_Allreduce` des fréquences.
