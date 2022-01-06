@@ -49,3 +49,6 @@ On remarque pour les deux parallélisations une accélération qui augmente avec
 
 ## Première parallélisation MPI
 
+Dans le main on réserve la partie de reconstitution de de sauvegarde de l'image au processus 0 avec un `if (rank==0){}`.
+
+Ensuite, on réalise une partition de l'image en créant un nombre de lignes par processus `nj_loc=nj/nbp` dans la fonction discretTransformFourier
